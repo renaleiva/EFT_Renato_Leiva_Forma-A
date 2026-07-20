@@ -65,4 +65,22 @@ def buscar_codigo(codigo, juegos):
     else:
         return False
     
-                                            
+def stock_plataforma(plataforma, inventario, juegos):
+    plataforma = plataforma.lower().strip()
+    total_acumulado = 0
+    encontrado = False
+
+    for cod, datos in juegos.items():
+        if datos [1].lower() == plataforma:
+            encontrado = True
+            stock_disp = inventario[cod][1]
+            total_acumulado += stock_disp
+            print(f"El total de stock disponible es '{stock_disp}'") 
+    if encontrado == True:
+        print(f"'{stock_plataforma}' : {total_acumulado}")
+        return True
+    else:
+        return False
+    
+              
+
