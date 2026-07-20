@@ -81,6 +81,17 @@ def stock_plataforma(plataforma, inventario, juegos):
         return True
     else:
         return False
-    
-              
+
+def busqueda_precio(p_min, p_max, inventario, juegos):
+    lista_filtrada = []
+    for codigo, datos in inventario.items():
+        dentro_rango = datos[0]
+        stock_disp = datos[1]
+    if p_min <= dentro_rango <= p_max and stock_disp>0:
+        titulo_juego = juegos[codigo][0]
+        lista_filtrada.append ([titulo_juego, codigo, stock_disp])
+    if len(lista_filtrada) == 0:
+        return False
+        
+
 
