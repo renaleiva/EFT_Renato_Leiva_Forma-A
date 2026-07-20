@@ -57,7 +57,7 @@ def leer_opcion():
         else:
             return "fuera_rango"
     except ValueError:
-     return "no_disp"
+            return "no_disp"
 
 def buscar_codigo(codigo, juegos):
     if codigo in juegos:
@@ -77,7 +77,7 @@ def stock_plataforma(plataforma, inventario, juegos):
             total_acumulado += stock_disp
             print(f"El total de stock disponible es '{stock_disp}'") 
     if encontrado == True:
-        print(f"'{stock_plataforma}' : {total_acumulado}")
+        print(f"El stock por plataforma es de: '{stock_plataforma}' El stock total acumulado es de: {total_acumulado}")
         return True
     else:
         return False
@@ -92,6 +92,16 @@ def busqueda_precio(p_min, p_max, inventario, juegos):
         lista_filtrada.append ([titulo_juego, codigo, stock_disp])
     if len(lista_filtrada) == 0:
         return False
+    
+    for i in range(len(lista_filtrada)):
+        for j in range(len(lista_filtrada)):
+            if lista_filtrada[i][0] < lista_filtrada[j][0]:
+                lista_filtrada[i], lista_filtrada[j] = lista_filtrada[j], lista_filtrada[i]
+
+    for juego in lista_filtrada:
+        print(f"Juego: {juego[0]} y Juego: ({juego[1]}) dentro del rango de precios.")
+        print(f"Stock disponible: {juego[0]} = {juego[2]}")
+        return True            
     
 def actualizar_precio(codigo, nuevo_precio, inventario):
     inventario[codigo][0] = nuevo_precio
@@ -120,7 +130,7 @@ def main():
   'G005': ['Mystic Farm', 'Switch', 'simulacion', 'E', False, 'GreenSeed'],
   'G006': ['Shadow Tactics', 'Xbox', 'estrategia', 'M', False, 'IronGate'],
  
- }
+          }
     
     inventario = {
   'G001': [9990, 7],
@@ -130,7 +140,7 @@ def main():
   'G005': [17990, 9],
   'G006': [39990, 2],
 
- }
+          }
     
     while True:
         print("========== MENÚ PRINCIPAL ==========")
@@ -142,6 +152,7 @@ def main():
         print("6. Salir")
         print("=====================================")
 
+        
         opcion = leer_opcion()
         if opcion == "no_disp":
          print("Error, la opcion debe ser un numero mayor a 0.")
@@ -150,11 +161,13 @@ def main():
             print("Error, la opcion debe ser un numero entero valido")
             continue
 
+        
         if opcion == 1:
-            stock = input("Ingrese el nombre del juego que desea revisar: ")
+            stock = input("Ingrese la plataforma que desea consultar: ")
             if stock_plataforma (stock, inventario, juegos) == False:
                 print("Error, no se ha encontrado el titulo.")
 
+        
         elif opcion == 2:
             try:
                 p_min = int(input("Ingrese el precio minimo: "))
@@ -165,6 +178,7 @@ def main():
             except ValueError:
                 print("Error, el precio deben ser numeros enteros validos.")
 
+        
         elif opcion == 3:
             codigo = input("Ingrese el codigo del juego para ingresar al precio: ")
             if buscar_codigo(codigo, juegos) == False:
@@ -180,6 +194,7 @@ def main():
             except ValueError:
                 print("Debe ingresar un precio valido para poder actualizar.")
 
+        
         elif opcion == 4:
             try:
                 codigo = input("Ingrese el codigo del juego a ingresar: ")
@@ -195,12 +210,13 @@ def main():
             except ValueError:
                 print("Error debe ingresar datos validos.")
                 continue
-            if(codigo != "" and not buscar_codigo(codigo, juegos)) and validar_titulo(titulo) and validar_plataforma(plataforma) and validar_genero(genero) and validar_clasificacion(clasificacion) and validar_multiplayer(multiplayer) and validar_editor(editor) and validar_precio(precio):
+            if(codigo != "" and not buscar_codigo(codigo, juegos)) and validar_titulo(titulo) and validar_plataforma(plataforma) and validar_genero(genero) and validar_clasificacion(clasificacion) and validar_multiplayer(multiplayer) and validar_editor(editor) and validar_precio(precio) and validar_stock(stock):
               agregar_juego(codigo, titulo, plataforma, genero, clasificacion, multiplayer, editor, precio, stock) 
               print (f"Exito, VideoJuego: {titulo}, agregado con exito.")
             else:
                 print("Error, los datos no son compatibles para agregar el videojuego.")                                            
 
+        
         elif opcion == 5:
             codigo = input("Ingrese el codigo de la pelicula que desea eliminar: ")
             if eliminar_juego(codigo, inventario, juegos) == True:
@@ -208,10 +224,10 @@ def main():
             else:
                 print("Error, los datos no son validos o el codigo de la pelicula no existe.")
 
+        
         elif opcion == 6:
             print("Programa finalizado.")
             break
-
 main()                
 
 
