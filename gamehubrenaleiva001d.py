@@ -92,6 +92,11 @@ def busqueda_precio(p_min, p_max, inventario, juegos):
         lista_filtrada.append ([titulo_juego, codigo, stock_disp])
     if len(lista_filtrada) == 0:
         return False
+    
+def actualizar_precio(codigo, nuevo_precio, inventario):
+    inventario[codigo][0] = nuevo_precio
+    
+        
         
 
 
