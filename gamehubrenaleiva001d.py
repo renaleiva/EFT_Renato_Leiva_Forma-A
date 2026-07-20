@@ -103,7 +103,11 @@ def agregar_juego(juegos, inventario, codigo, titulo, plataforma, genero, clasif
         valor_multi = False
 
     juegos[codigo] = [titulo, plataforma, genero, clasificacion, valor_multi, editor]  
-    inventario[codigo] = [precio, stock]          
+    inventario[codigo] = [precio, stock] 
+
+def eliminar_juego(codigo, inventario, juegos):
+    juegos.pop(codigo)
+    inventario.pop(codigo)             
         
 
 
