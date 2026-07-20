@@ -95,8 +95,15 @@ def busqueda_precio(p_min, p_max, inventario, juegos):
     
 def actualizar_precio(codigo, nuevo_precio, inventario):
     inventario[codigo][0] = nuevo_precio
-    
-        
+
+def agregar_juego(juegos, inventario, codigo, titulo, plataforma, genero, clasificacion, es_multi, editor, precio, stock):
+    if es_multi.lower().strip() == "si":
+        valor_multi = True
+    else:
+        valor_multi = False
+
+    juegos[codigo] = [titulo, plataforma, genero, clasificacion, valor_multi, editor]  
+    inventario[codigo] = [precio, stock]          
         
 
 
